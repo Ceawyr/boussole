@@ -1,0 +1,180 @@
+################################################################################
+# Valgrind Suppression File - cub3D - WSL / MLX / system libs
+# Clean: no definitely/indirectly/possibly lost; still reachable fully suppressed.
+# Purpose: Ignore known harmless leaks and warnings from system libraries
+################################################################################
+
+#------------------------------------------------------------------------------
+# Glibc / Dynamic loader
+#------------------------------------------------------------------------------
+{
+   <ld_linux>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/lib*/ld-*.so
+   ...
+}
+{
+   <libc>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/lib*/libc.so.*
+   ...
+}
+
+#------------------------------------------------------------------------------
+# Standard C++ and related runtimes
+#------------------------------------------------------------------------------
+{
+   <libstdc++>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libstdc++.so.*
+   ...
+}
+{
+   <libc++abi>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libc++abi.so*
+   ...
+}
+
+#------------------------------------------------------------------------------
+# Graphical libs: X11, GL, GLFW
+#------------------------------------------------------------------------------
+{
+   <libX11>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libX11*.so*
+   ...
+}
+{
+   <libGLdispatch>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libGLdispatch.so*
+   ...
+}
+{
+   <libglfw>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libglfw*.so*
+   ...
+}
+
+#------------------------------------------------------------------------------
+# LLVM-related libs (often used by GPU drivers / Mesa)
+#------------------------------------------------------------------------------
+{
+   <libLLVM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libLLVM*.so*
+   ...
+}
+
+#------------------------------------------------------------------------------
+# WSL/DXCore-related leaks and uninitialized value warnings
+#------------------------------------------------------------------------------
+{
+   <libdxcore>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib*/libdxcore.so*
+   ...
+}
+{
+   <libdxcore_uninit>
+   Memcheck:Cond
+   ...
+   obj:/usr/lib*/libdxcore.so*
+}
+
+#------------------------------------------------------------------------------
+# Dynamic loader internal allocations
+#------------------------------------------------------------------------------
+{
+   <dlopen_related>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:dlopen*
+}
+{
+   <dlclose_related>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:_dl_close
+   fun:_dl_catch_error
+   fun:_dlerror_run
+}
+{
+   <dl_close_worker>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_close_worker*
+   fun:_dl_close
+}
+{
+   <dl_map_object_from_fd>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_map_object_from_fd
+}
+{
+   <dl_map_object_deps>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_map_object_deps
+}
+{
+   <_dl_new_object>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_new_object
+}
+{
+   <_dl_load_cache_lookup>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_load_cache_lookup
+}
+
+#------------------------------------------------------------------------------
+# Misc dynamic allocations inside loader (strdup, calloc)
+#------------------------------------------------------------------------------
+{
+   <strdup_in_dl>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:strdup
+   fun:_dl_load_cache_lookup
+}
+{
+   <calloc_in_dl>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:calloc
+   fun:_dl_new_object
+}
