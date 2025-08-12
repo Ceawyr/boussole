@@ -6,7 +6,7 @@
 /*   By: cnamoune <cnamoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 17:41:06 by mwallis           #+#    #+#             */
-/*   Updated: 2025/08/11 22:48:04 by cnamoune         ###   ########.fr       */
+/*   Updated: 2025/08/12 18:40:02 by cnamoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ typedef struct s_resources
 	mlx_image_t		*screen;
 	mlx_image_t		*compass_background;
 	mlx_image_t		*compass_needle;
-	mlx_image_t		*compass_overlay;
 
 	// mlx_window_t *win;	// optionnel, si jamais tu veux manipuler la fenetre pour faire une victoire a la fin d'un labyrinth
 

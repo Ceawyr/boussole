@@ -36,9 +36,6 @@ static void handle_player_movement(mlx_t *mlx,
 }
 
 
-
-
-
 void	handle_keypress_input(t_resources *resources)
 {
     mlx_t			*mlx;
@@ -52,11 +49,9 @@ void	handle_keypress_input(t_resources *resources)
         free_map_data(&(resources->map_data));
 	    exit(0);
     }
-	
     mlx = resources->mlx;
 	map_data = &resources->map_data;
     player_data = &resources->player_data;
-
     handle_player_movement(mlx, map_data, resources, player_data);
 }
 

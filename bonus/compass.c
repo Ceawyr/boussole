@@ -6,7 +6,7 @@
 /*   By: cnamoune <cnamoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 22:44:08 by cnamoune          #+#    #+#             */
-/*   Updated: 2025/08/11 23:06:34 by cnamoune         ###   ########.fr       */
+/*   Updated: 2025/08/12 18:40:23 by cnamoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_compass(t_resources *resources)
 			"./images/compass_needle.png");
 	if (!resources->compass_background || !resources->compass_needle)
 		write(2, "Warning: Could not load compass images\n", 40);
-	resources->compass_overlay = NULL;
 }
 
 void	free_compass_resources(t_resources *resources)
@@ -34,10 +33,5 @@ void	free_compass_resources(t_resources *resources)
 	{
 		mlx_delete_image(resources->mlx, resources->compass_needle);
 		resources->compass_needle = NULL;
-	}
-	if (resources->compass_overlay)
-	{
-		mlx_delete_image(resources->mlx, resources->compass_overlay);
-		resources->compass_overlay = NULL;
 	}
 }

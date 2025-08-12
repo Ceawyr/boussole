@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compass_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cnamoune <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cnamoune <cnamoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 22:47:42 by cnamoune          #+#    #+#             */
-/*   Updated: 2025/08/11 22:48:41 by cnamoune         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:40:25 by cnamoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,15 @@ void	render_compass(t_resources *resources)
 	t_compass_pos	pos;
 	t_needle_data	needle_data;
 	double			player_angle;
+	double			angle_to_north;
 
 	if (!resources->compass_background || !resources->compass_needle)
 		return ;
 	init_compass_position(resources, &pos);
 	draw_compass_background(resources, &pos);
 	player_angle = calculate_player_angle(&resources->player_data);
-	init_needle_data(&needle_data, resources->compass_needle, player_angle);
+	angle_to_north = -player_angle;
+	init_needle_data(&needle_data, resources->compass_needle, angle_to_north);
 	draw_needle_pixel(resources->screen, resources->compass_needle,
 		&pos, &needle_data);
 }
